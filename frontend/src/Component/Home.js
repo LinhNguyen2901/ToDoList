@@ -17,7 +17,11 @@ export default function Home() {
     return (
         <div className="container">
             <h2 className="header">To Do List</h2>
-            <ul>
+            <div className="add-todo">
+                <input type="text" placeholder="Your Task"></input>
+                <button type="submit">Add</button>
+            </div>
+            <ul className="todoitems">
                 {todos.map((todo, id) => (
                     <li key={id}>{todo.title}</li>
                 ))}
