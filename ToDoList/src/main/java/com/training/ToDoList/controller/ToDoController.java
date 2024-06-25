@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/todo")
+@RequestMapping(value = "/api")
+@CrossOrigin("http://localhost:3000")
 public class ToDoController {
 
     private final ToDoService toDoService;
@@ -20,7 +21,7 @@ public class ToDoController {
         this.toDoService = toDoService;
     }
 
-    @GetMapping
+    @GetMapping (value = "/todo")
     public List<ToDoItem> getAll() {
         return toDoService.getAll();
     }
