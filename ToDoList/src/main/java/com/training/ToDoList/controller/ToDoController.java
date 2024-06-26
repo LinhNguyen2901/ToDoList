@@ -26,7 +26,7 @@ public class ToDoController {
         return toDoService.getAll();
     }
 
-    @PostMapping
+    @PostMapping (value = "/add")
     public ResponseEntity<ToDoItem> addToDo(@RequestBody ToDoItem toDoItem) {
         ToDoItem addedToDo = toDoService.saveOrUpdateToDo(toDoItem);
         return ResponseEntity.status(HttpStatus.CREATED).body(addedToDo);
