@@ -26,19 +26,19 @@ public class ToDoController {
         return toDoService.getAll();
     }
 
-    @PostMapping (value = "/add")
+    @PostMapping (value = "/item")
     public ResponseEntity<ToDoItem> addToDo(@RequestBody ToDoItem toDoItem) {
         ToDoItem addedToDo = toDoService.saveOrUpdateToDo(toDoItem);
         return ResponseEntity.status(HttpStatus.CREATED).body(addedToDo);
     }
 
-    @PutMapping
+    @PutMapping (value = "/item/{id}")
     public ResponseEntity<ToDoItem> updateToDo(@RequestBody ToDoItem toDoItem) {
         ToDoItem updatedToDo = toDoService.saveOrUpdateToDo(toDoItem);
         return ResponseEntity.ok(updatedToDo);
     }
 
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping(value = "/item/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         toDoService.deleteToDoById(id);
         return ResponseEntity.noContent().build();

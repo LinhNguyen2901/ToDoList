@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
+import './Home.css'
 
 export default function Home() {
 
     let navigate = useNavigate();
 
     const [todos, setToDos] = useState([]);
+
+    const {id} = useParams();
 
     useEffect(() => {
         loadToDo();
@@ -29,10 +32,15 @@ export default function Home() {
 
     const onSubmit = async(e) => {
         e.preventDefault();
-        await axios.post("http://localhost:8080/api/add", item);
+        await axios.post("http://localhost:8080/api/item", item);
         await loadToDo();
         setItem({...item,title:""});
         navigate("/")
+    }
+
+    const deleteItem = async(id) => {
+        await axios.delete(`http://localhost:8080/api/item/${id}`);
+        loadToDo();
     }
 
     return (
@@ -46,7 +54,7 @@ export default function Home() {
             </form>
             <ul className="todoitems">
                 {todos.map((todo, id) => (
-                    <li key={id}>{todo.title}</li>
+                    <li key={id}>{todo.title} <button type="submit" onClick={() => deleteItem(todo.id)}>Delete</button> </li>
                 ))}
             </ul>
         </div>
